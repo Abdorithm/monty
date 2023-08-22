@@ -1,13 +1,15 @@
 #include "main.h"
 
+state_t state = INIT_STATE;
+
 int main(int argc, char *argv[])
 {
 	stack_t *stack = NULL;
 	char *buffer = NULL;
-	File *fl_pd;
+	FILE *fl_pd;
 	size_t n = 0;
 	size_t r_line = 1;
-	unsigned int line_counter;
+	unsigned int line_counter = 0;
 
 	if (argc != 2)
 	{
@@ -15,6 +17,8 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	fl_pd = fopen(argv[1], "r");
+	state.file = fl_pd;
+	state.stack = stack;
 	if (!fl_pd)
 	{
 		fprintf(stderr, "Error: Can't open file %s", argv[1]);
@@ -24,9 +28,11 @@ int main(int argc, char *argv[])
 	{
 		r_line = getline(&buffer, &n, fl_pd);
 		line_counter++;
-		tokenizer(buffer, line_counter, fl_pd);
+		if (r_line > 0)
+			function_caller(buffer, &state);
 		free(buffer);
 	}
-	fclose(file);
+	state.line_counter = line_counter;
+	fclose(fl_pd);
 	return (0);
 }

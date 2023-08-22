@@ -9,23 +9,7 @@
 #include <string.h>
 #include <ctype.h>
 
-/**
- * struct state_t - a state to track variables across modules
- * @file: file pointer to close the file from functions
- * @buffer: line returned from the file
- * @flag: a flag to toggle between stack and queue
- *
- * Description: a state like structure to access multile variables
- * from different functions
- */
-
-
-typedef struct state_t
-{
-        File *file;
-        char *buffer;
-        int flag;
-} state_t;
+#define INIT_STATE {NULL, NULL, NULL, NULL, 0}
 
 
 /**
@@ -43,6 +27,27 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
+/**
+ * struct state_t - a state to track variables across modules
+ * @file: file pointer to close the file from functions
+ * @buffer: line returned from the file
+ * @flag: a flag to toggle between stack and queue
+ *
+ * Description: a state like structure to access multile variables
+ * from different functions
+ */
+
+
+typedef struct state_t
+{
+        stack_s *stack;
+        FILE *file;
+        char *buffer;
+        int line_counter;
+        int flag;
+} state_t;
+
 
 /**
  * struct instruction_s - opcode and its function
