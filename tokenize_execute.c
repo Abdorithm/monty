@@ -3,6 +3,22 @@
 #include <string.h>
 
 /**
+ * function_caller - call the right function
+ * @buffer: the input command
+ * @state: struct containing the current stack or queue
+ */
+void function_caller(char *buffer, state_t *state)
+{
+	char **args = tokenize(buffer);
+
+	/**
+	 * after we get the command and its arguments
+	 * we call choose_f to choose the right function
+	 */
+	choose_f(args[0], args[1], state);
+}
+
+/**
  * tokenize - tokenize the input string.
  * @buffer: the input command.
  *
@@ -16,7 +32,7 @@ char **tokenize(char *buffer)
 	tmp = strdup(buffer);
 	if (tmp == NULL)
 	{
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	tmp_token = strtok(tmp, " \t\n");
@@ -29,7 +45,7 @@ char **tokenize(char *buffer)
 	args = (char **)malloc(sizeof(char *) * size);
 	if (args == NULL)
 	{
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	for (i = 0; i < size - 1; i++)
@@ -41,7 +57,7 @@ char **tokenize(char *buffer)
 			for (i--; i >= 0; i--)
 				free(args[i]);
 			free(args);
-			printf("Error: malloc failed\n");
+			fprintf(stderr, "Error: malloc failed\n");
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -53,10 +69,10 @@ char **tokenize(char *buffer)
  * choose_f - choose the function corresponding
  * to the opcode and call it.
  * @opcode: ...
- * @doubly_list: the stack or queue.
+ * @state: a struct containing the current stack or queue
  * @n: the chosen function paramenter.
  */
-void choose_f(char *opcode, int n, stack_t **doubly_list)
+void choose_f(char *opcode, int n, state_t *state)
 {
 	int i;
 
@@ -67,5 +83,8 @@ void choose_f(char *opcode, int n, stack_t **doubly_list)
 	};
 	for (i = 0; instruction_type[i].opcode != NULL; i++)
 		if (opcode == instruction_type[i].opcode)
-			return (instruction_type[i].f(doubly_list, n));
+			instruction_type[i].f(state->doubly_list, n);
+
+	if (instruction_type[i].opcode == NULL)
+		fprintf(stderr, "%d: unknown instruction %s\n", state->counter, opcode);
 }
