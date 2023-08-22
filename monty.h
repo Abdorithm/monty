@@ -2,6 +2,31 @@
 #define _MONTY_
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
+#include <ctype.h>
+
+/**
+ * struct state_t - a state to track variables across modules
+ * @file: file pointer to close the file from functions
+ * @buffer: line returned from the file
+ * @flag: a flag to toggle between stack and queue
+ *
+ * Description: a state like structure to access multile variables
+ * from different functions
+ */
+
+
+typedef struct state_t
+{
+        File *file;
+        char *buffer;
+        int flag;
+} state_t;
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
