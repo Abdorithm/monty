@@ -5,14 +5,13 @@
 * @stack: pointer to the stack
 */
 
-void free_stack(stack_t *stack)
+void free_stack(stack_t **stack)
 {
-	stack_t *nextNode = stack;
+	stack_t *nextNode = *stack;
 
-	while (stack)
+	while (nextNode)
 	{
-		nextNode = stack->next;
-		free(stack);
-		stack = nextNode;
+		free(nextNode);
+		nextNode = nextNode->next;
 	}
 }

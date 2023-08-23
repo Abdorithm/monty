@@ -41,7 +41,7 @@ typedef struct stack_s
 
 typedef struct state_t
 {
-        stack_t *stack;
+        stack_t **stack;
         FILE *file;
         char *buffer;
         int line_counter;
@@ -63,4 +63,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+
+void function_caller(char *buffer, state_t *state);
+char **tokenize(char *buffer);
+void choose_f(char *opcode, char *n, state_t *state);
 #endif
