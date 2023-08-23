@@ -48,7 +48,7 @@ typedef struct state_t
         int flag;
 } state_t;
 
-extern state_t state /*this makes sure state is in the global scope*/
+extern state_t state; /*this makes sure state is in the global scope*/
 
 /**
  * struct instruction_s - opcode and its function
@@ -63,5 +63,14 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+void free_stack(stack_t *stack);
+void push(stack_t **stack, unsigned int line_number);
+void print_all(stack_t **stack, unsigned int line_number);
+void print_top(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void do_nothing(stack_t **stack, unsigned int line_number);
 
 #endif
