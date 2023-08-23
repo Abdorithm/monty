@@ -48,6 +48,7 @@ typedef struct state_t
         int flag;
 } state_t;
 
+extern state_t state /*this makes sure state is in the global scope*/
 
 /**
  * struct instruction_s - opcode and its function
