@@ -5,9 +5,8 @@
 /**
  * function_caller - call the right function
  * @buffer: the input command
- * @state: struct containing the current stack or queue
  */
-void function_caller(char *buffer, state_t *state)
+void function_caller(char *buffer)
 {
 	char **args = tokenize(buffer);
 
@@ -69,10 +68,9 @@ char **tokenize(char *buffer)
  * choose_f - choose the function corresponding
  * to the opcode and call it.
  * @opcode: ...
- * @state: a struct containing the current stack or queue
  * @n: the chosen function paramenter.
  */
-void choose_f(char *opcode, char *n, state_t *state)
+void choose_f(char *opcode, char *n)
 {
 	int i;
 
