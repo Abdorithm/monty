@@ -41,7 +41,7 @@ typedef struct stack_s
 
 typedef struct state_t
 {
-        stack_s *stack;
+        stack_t *stack;
         FILE *file;
         char *buffer;
         int line_counter;
