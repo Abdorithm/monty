@@ -41,14 +41,18 @@ typedef struct stack_s
 
 typedef struct state_t
 {
-        stack_t *stack;
+        stack_t **stack;
         FILE *file;
         char *buffer;
         int line_counter;
         int flag;
 } state_t;
 
+<<<<<<< HEAD
 extern state_t state; /*this makes sure state is in the global scope*/
+=======
+extern state_t *state; /*this makes sure state is in the global scope*/
+>>>>>>> 6f11b7274977bd19d097a0a31b11e150fd266b95
 
 /**
  * struct instruction_s - opcode and its function
@@ -64,6 +68,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+<<<<<<< HEAD
 void free_stack(stack_t *stack);
 void push(stack_t **stack, unsigned int line_number);
 void print_all(stack_t **stack, unsigned int line_number);
@@ -73,4 +78,10 @@ void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void do_nothing(stack_t **stack, unsigned int line_number);
 
+=======
+
+void function_caller(char *buffer);
+char **tokenize(char *buffer);
+void choose_f(char *opcode, char *n);
+>>>>>>> 6f11b7274977bd19d097a0a31b11e150fd266b95
 #endif

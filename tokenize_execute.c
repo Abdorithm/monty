@@ -5,9 +5,8 @@
 /**
  * function_caller - call the right function
  * @buffer: the input command
- * @state: struct containing the current stack or queue
  */
-void function_caller(char *buffer, state_t *state)
+void function_caller(char *buffer)
 {
 	char **args = tokenize(buffer);
 
@@ -69,10 +68,9 @@ char **tokenize(char *buffer)
  * choose_f - choose the function corresponding
  * to the opcode and call it.
  * @opcode: ...
- * @state: a struct containing the current stack or queue
  * @n: the chosen function paramenter.
  */
-void choose_f(char *opcode, int n, state_t *state)
+void choose_f(char *opcode, char *n)
 {
 	int i;
 
@@ -83,8 +81,8 @@ void choose_f(char *opcode, int n, state_t *state)
 	};
 	for (i = 0; instruction_type[i].opcode != NULL; i++)
 		if (opcode == instruction_type[i].opcode)
-			instruction_type[i].f(state->doubly_list, n);
+			instruction_type[i].f(state->stack, atoi(n));
 
 	if (instruction_type[i].opcode == NULL)
-		fprintf(stderr, "%d: unknown instruction %s\n", state->counter, opcode);
+		fprintf(stderr, "%d: unknown instruction %s\n", state->line_counter, opcode);
 }
