@@ -1,5 +1,14 @@
 #include "monty.h"
 
+state_t state = INIT_STATE;
+
+
+/**
+ * main - main function
+ * @argc: number of arguments
+ * @argv: arguments vector
+ */
+
 int main(int argc, char *argv[])
 {
 	state_t *state;
