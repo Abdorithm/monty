@@ -18,14 +18,14 @@ void free_stack(stack_t *stack)
 }
 
 /**
- * free_2d - frees an array of strings from
+ * free_args - frees an array of strings from
  * the heap.
  * @array: the array
  */
 void free_args(char **array)
 {
 	int i = 0;
-	
+
 	while (array[i])
 		free(array[i]), i++;
 	free(array);
