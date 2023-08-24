@@ -3,13 +3,10 @@
 /**
  * add - add the top two elements
  * @stack: pointer to the stack
- * @line_number: line number from the file
+ * @number: the integer parameter
  * Return: void
 */
-
-
-
-void add(stack_t **stack, unsigned int line_number)
+void add(stack_t **stack, char *number)
 {
 	stack_t *top;
 	int length = 0, result = 0;
@@ -22,9 +19,9 @@ void add(stack_t **stack, unsigned int line_number)
 	}
 	if (length < 2)
 	{
-		fprintf(stderr, "L%d: can't add, stack too short", line_number);
-		fclose(state.file);
-		free_stack(*stack);
+		fprintf(stderr, "L%d: can't add, stack too short", state->line_counter);
+		fclose(state->file);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	top = *stack;

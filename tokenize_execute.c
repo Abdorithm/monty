@@ -1,6 +1,4 @@
 #include "monty.h"
-#include <stdlib.h>
-#include <string.h>
 
 /**
  * function_caller - call the right function
@@ -14,7 +12,7 @@ void function_caller(char *buffer)
 	 * after we get the command and its arguments
 	 * we call choose_f to choose the right function
 	 */
-	choose_f(args[0], args[1], state);
+	choose_f(args[0], args[1]);
 }
 
 /**
@@ -81,7 +79,7 @@ void choose_f(char *opcode, char *n)
 	};
 	for (i = 0; instruction_type[i].opcode != NULL; i++)
 		if (opcode == instruction_type[i].opcode)
-			instruction_type[i].f(state->stack, atoi(n));
+			instruction_type[i].f(state->stack, n);
 
 	if (instruction_type[i].opcode == NULL)
 		fprintf(stderr, "%d: unknown instruction %s\n", state->line_counter, opcode);
