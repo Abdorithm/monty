@@ -54,8 +54,8 @@ void top(stack_t **stack, unsigned int line_number)
 	stack_t *tmp = *stack;
 	(void)line_number;
 
-	while (tmp->next != NULL)
-		tmp = tmp->next;
+	if (tmp == NULL)
+		fprintf(stderr, "%d: can't pint, stack empty", line_number);
 	printf("%d\n", tmp->n);
 }
 
