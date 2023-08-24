@@ -29,7 +29,8 @@ int checkEmpty(char *buffer)
 int main(int argc, char *argv[])
 {
 	char *buffer = NULL;
-	size_t r_line = 1, n = 0;
+	size_t n = 0;
+	int r_line;
 
 	state = malloc(sizeof(state_t *));
 	if (state == NULL)
@@ -62,6 +63,8 @@ int main(int argc, char *argv[])
 			function_caller(buffer);
 		free(buffer);
 	}
+	free_stack(state->stack);
+	free(state);
 	fclose(state->file);
 	return (0);
 }

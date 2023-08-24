@@ -8,11 +8,12 @@ void function_caller(char *buffer)
 {
 	char **args = tokenize(buffer);
 
+	state->arg = args[1];
 	/**
 	 * after we get the command and its arguments
 	 * we call choose_f to choose the right function
 	 */
-	choose_f(args[0], args[1]);
+	choose_f(args[0]);
 }
 
 /**
@@ -26,7 +27,7 @@ char **tokenize(char *buffer)
 	char **args = NULL, *token, *tmp, *tmp_token;
 	int size = 0, i;
 
-	tmp = strdup(buffer);
+	tmp = _strdup(buffer);
 	if (tmp == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -48,7 +49,7 @@ char **tokenize(char *buffer)
 	for (i = 0; i < size - 1; i++)
 	{
 		token = strtok((i ? NULL : buffer), " \t\n");
-		args[i] = strdup(token);
+		args[i] = _strdup(token);
 		if (args[i] == NULL)
 		{
 			for (i--; i >= 0; i--)
@@ -66,9 +67,8 @@ char **tokenize(char *buffer)
  * choose_f - choose the function corresponding
  * to the opcode and call it.
  * @opcode: ...
- * @n: the chosen function paramenter.
  */
-void choose_f(char *opcode, char *n)
+void choose_f(char *opcode)
 {
 	int i;
 

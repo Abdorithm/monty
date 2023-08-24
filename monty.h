@@ -1,3 +1,7 @@
+#ifndef _GNU_SOURCE
+#define  _GNU_SOURCE
+#endif
+
 #ifndef _MONTY_
 #define _MONTY_
 
@@ -5,7 +9,6 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <fcntl.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -43,7 +46,7 @@ typedef struct state_t
 {
         stack_t **stack;
         FILE *file;
-        char *buffer;
+        char *arg;
         int line_counter;
         int flag;
 } state_t;
@@ -67,6 +70,7 @@ typedef struct instruction_s
 int not_a_number(char *s);
 int checkEmpty(char *buffer);
 void free_stack(stack_t **stack);
+char *_strdup(char *str);
 
 /* operations */
 void push(stack_t **stack, unsigned int line_number);
@@ -79,6 +83,6 @@ void do_nothing(stack_t **stack, unsigned int line_number);
 
 void function_caller(char *buffer);
 char **tokenize(char *buffer);
-void choose_f(char *opcode, char *n);
+void choose_f(char *opcode);
 
 #endif
