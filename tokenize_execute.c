@@ -76,7 +76,8 @@ void choose_f(char *opcode)
 	instruction_t instruction_type[] = { /* array of structs to choose from */
 		{"push", push}, {"pall", pall}, {"pint", top},
 		{"pop", pop}, {"swap", swap}, {"add", add},
-		{"nop", do_nothing}, {NULL, NULL}
+		{"nop", do_nothing}, {"sub", sub}, {"div", divide},
+		{"mul", mul}, {"mod", mod}, {NULL, NULL}
 	};
 
 	for (i = 0; instruction_type[i].opcode != NULL; i++)
