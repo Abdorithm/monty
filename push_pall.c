@@ -75,7 +75,7 @@ int not_a_number(char *s)
 	int i;
 
 	for (i = 0; s[i]; i++)
-		if (s[i] < '0' || s[i] > '9')
+		if ((s[i] < '0' || s[i] > '9') && s[i] != '-')
 			return (1);
 	return (0);
 }
