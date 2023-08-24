@@ -14,6 +14,7 @@ void function_caller(char *buffer)
 	 * we call choose_f to choose the right function
 	 */
 	choose_f(args[0]);
+	free_args(args);
 }
 
 /**
@@ -70,17 +71,18 @@ char **tokenize(char *buffer)
  */
 void choose_f(char *opcode)
 {
-	int i;
+	int i, done = 0;
 
 	instruction_t instruction_type[] = { /* array of structs to choose from */
 		{"push", push}, {"pall", pall}, {"pint", top},
 		{"pop", pop}, {"swap", swap}, {"add", add},
 		{"nop", do_nothing}, {NULL, NULL}
 	};
-	for (i = 0; instruction_type[i].opcode != NULL; i++)
-		if (opcode == instruction_type[i].opcode)
-			instruction_type[i].f(state.stack, state.line_counter);
 
-	if (instruction_type[i].opcode == NULL)
+	for (i = 0; instruction_type[i].opcode != NULL; i++)
+		if (strcmp(opcode, instruction_type[i].opcode) == 0)
+			instruction_type[i].f(&state.stack, state.line_counter), done = 1;
+
+	if (instruction_type[i].opcode == NULL && done == 0)
 		fprintf(stderr, "%d: unknown instruction %s\n", state.line_counter, opcode);
 }

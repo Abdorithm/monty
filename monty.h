@@ -1,5 +1,5 @@
 #ifndef _GNU_SOURCE
-#define  _GNU_SOURCE
+#define _GNU_SOURCE
 #endif
 
 #ifndef _MONTY_
@@ -13,7 +13,6 @@
 #include <ctype.h>
 
 #define INIT_STATE {NULL, NULL, NULL, 0, 0}
-
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -44,14 +43,14 @@ typedef struct stack_s
 
 typedef struct state_s
 {
-        stack_t **stack;
+        stack_t *stack;
         FILE *file;
         char *arg;
         int line_counter;
         int flag;
 } state_t;
 
-extern state_t state; /*this makes sure state is in the global scope*/
+extern state_t state;
 
 /**
  * struct instruction_s - opcode and its function
@@ -69,8 +68,9 @@ typedef struct instruction_s
 
 int not_a_number(char *s);
 int checkEmpty(char *buffer);
-void free_stack(stack_t **stack);
+void free_stack(stack_t *stack);
 char *_strdup(char *str);
+void free_args(char **array);
 
 /* operations */
 void push(stack_t **stack, unsigned int line_number);

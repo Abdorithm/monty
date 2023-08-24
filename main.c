@@ -3,6 +3,26 @@
 state_t state = INIT_STATE;
 
 /**
+ * readLine - ...
+ *
+ * Return: pointer to the command
+ */
+char *readLine()
+{
+	char *line = NULL;
+	size_t n = 0;
+	int r_line;
+
+	r_line = getline(&line, &n, state.file);
+	if (r_line == -1)
+	{
+		free(line);
+		return (NULL);
+	}
+	return (line);
+}
+
+/**
  * checkEmpty - ...
  * @buffer: the input
  *
@@ -31,37 +51,39 @@ int checkEmpty(char *buffer)
 int main(int argc, char *argv[])
 {
 	char *buffer = NULL;
-	size_t n = 0;
-	int r_line;
-	
-	state.stack = malloc(sizeof(stack_t *));
-	if (state.stack == NULL)
-		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 
+	state.stack = NULL;
 	state.line_counter = 0;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
 	}
+
 	state.file = fopen(argv[1], "r");
 	if (!state.file)
 	{
-		fprintf(stderr, "Error: Can't open file %s", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (state.line_counter++)
+	while (1)
 	{
-		r_line = getline(&buffer, &n, state.file);
-		if (r_line == -1) /* EOF */
+		buffer = readLine();
+		state.line_counter++;
+		if (buffer == NULL)
 		{
 			free(buffer);
 			break;
 		}
-		if (!checkEmpty(buffer))
-			function_caller(buffer);
+		if (checkEmpty(buffer))
+		{
+			free(buffer);
+			continue;
+		}
+		function_caller(buffer);
 		free(buffer);
 	}
-	free_stack(state.stack);
 	fclose(state.file);
+	free_stack(state.stack);
 	return (0);
 }
