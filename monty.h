@@ -13,7 +13,7 @@
 #include <ctype.h>
 
 
-#define INIT_STATE {NULL, NULL, NULL, 0}
+#define INIT_STATE {NULL, NULL, NULL, NULL, 0}
 
 
 
@@ -49,7 +49,8 @@ typedef struct state_s
 {
 	stack_t *stack;
 	FILE *file;
-	char *arg;
+	char *buffer;
+	char **arg;
 	int line_counter;
 } state_t;
 
