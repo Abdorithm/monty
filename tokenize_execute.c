@@ -73,13 +73,13 @@ void choose_f(char *opcode, char *n)
 	int i;
 
 	instruction_t instruction_type[] = { /* array of structs to choose from */
-		{"push", push}, {"pall", print_all}, {"pint", print_top},
+		{"push", push}, {"pall", pall}, {"pint", top},
 		{"pop", pop}, {"swap", swap}, {"add", add},
 		{"nop", do_nothing}, {NULL, NULL}
 	};
 	for (i = 0; instruction_type[i].opcode != NULL; i++)
 		if (opcode == instruction_type[i].opcode)
-			instruction_type[i].f(state->stack, n);
+			instruction_type[i].f(state->stack, state->line_counter);
 
 	if (instruction_type[i].opcode == NULL)
 		fprintf(stderr, "%d: unknown instruction %s\n", state->line_counter, opcode);

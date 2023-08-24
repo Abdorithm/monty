@@ -64,15 +64,19 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-
+int not_a_number(char *s);
+int checkEmpty(char *buffer);
 void free_stack(stack_t **stack);
-void push(stack_t **stack, char *number);
-void print_all(stack_t **stack, char *number);
-void print_top(stack_t **stack, char *number);
-void pop(stack_t **stack, char *number);
-void swap(stack_t **stack, char *number);
-void add(stack_t **stack, char *number);
-void do_nothing(stack_t **stack, char *number);
+
+/* operations */
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void top(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void do_nothing(stack_t **stack, unsigned int line_number);
+
 void function_caller(char *buffer);
 char **tokenize(char *buffer);
 void choose_f(char *opcode, char *n);
