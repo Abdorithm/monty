@@ -8,7 +8,7 @@ void function_caller(char *buffer)
 {
 	char **args = tokenize(buffer);
 
-	state->arg = args[1];
+	state.arg = args[1];
 	/**
 	 * after we get the command and its arguments
 	 * we call choose_f to choose the right function
@@ -79,8 +79,8 @@ void choose_f(char *opcode)
 	};
 	for (i = 0; instruction_type[i].opcode != NULL; i++)
 		if (opcode == instruction_type[i].opcode)
-			instruction_type[i].f(state->stack, state->line_counter);
+			instruction_type[i].f(state.stack, state.line_counter);
 
 	if (instruction_type[i].opcode == NULL)
-		fprintf(stderr, "%d: unknown instruction %s\n", state->line_counter, opcode);
+		fprintf(stderr, "%d: unknown instruction %s\n", state.line_counter, opcode);
 }

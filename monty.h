@@ -12,7 +12,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define INIT_STATE {NULL, NULL, NULL, NULL, 0}
+#define INIT_STATE {NULL, NULL, NULL, 0, 0}
 
 
 /**
@@ -42,7 +42,7 @@ typedef struct stack_s
  */
 
 
-typedef struct state_t
+typedef struct state_s
 {
         stack_t **stack;
         FILE *file;
@@ -51,7 +51,7 @@ typedef struct state_t
         int flag;
 } state_t;
 
-extern state_t *state; /*this makes sure state is in the global scope*/
+extern state_t state; /*this makes sure state is in the global scope*/
 
 /**
  * struct instruction_s - opcode and its function
