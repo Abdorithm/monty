@@ -11,7 +11,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL)
 		return;
-	if (state.arg == NULL || not_a_number(state.arg))
+	if (state.arg[1] == NULL || not_a_number(state.arg[1]))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
@@ -21,7 +21,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (new == NULL)
 		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 
-	new->n = atoi(state.arg);
+	new->n = atoi(state.arg[1]);
 	new->prev = NULL;
 	new->next = *stack;
 	*stack = new;
@@ -75,7 +75,7 @@ int not_a_number(char *s)
 	int i;
 
 	for (i = 0; s[i]; i++)
-		if (s[i] < '0' || s[i] > '9')
+		if ((s[i] < '0' || s[i] > '9') && s[i] != '-')
 			return (1);
 	return (0);
 }
@@ -101,7 +101,9 @@ char *_strdup(char *str)
 
 	copy = (char *)malloc((sizeof(char) * size) + 1);
 	if (copy == NULL)
-		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
+	{
+		return (NULL);
+	}
 
 	for (i = 0; i < size; i++)
 		copy[i] = str[i];

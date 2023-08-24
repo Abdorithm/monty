@@ -12,7 +12,10 @@
 #include <string.h>
 #include <ctype.h>
 
+
 #define INIT_STATE {NULL, NULL, NULL, 0}
+
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
