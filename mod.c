@@ -22,7 +22,7 @@ void mod(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	result = top->next->n % top->n;
+	result = (top->next->n) % (top->n);
 	top->next->n = result;
 	*stack = top->next;
 	free(top);
