@@ -14,9 +14,6 @@ void push(stack_t **stack, unsigned int line_number)
 	if (state.arg[1] == NULL || not_a_number(state.arg[1]))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		free_stack(state.stack);
-		free_args(state.arg);
-		fclose(state.file);
 		exit(EXIT_FAILURE);
 	}
 
@@ -63,9 +60,6 @@ void top(stack_t **stack, unsigned int line_number)
 	if (tmp == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		free_stack(state.stack);
-		free_args(state.arg);
-		fclose(state.file);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", tmp->n);

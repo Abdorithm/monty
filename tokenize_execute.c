@@ -31,7 +31,6 @@ char **tokenize(char *buffer)
 	tmp = _strdup(buffer);
 	if (tmp == NULL)
 	{
-		free_stack(state.stack), fclose(state.file);
 		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 	}
 	tmp_token = strtok(tmp, " \t\n");
@@ -44,7 +43,6 @@ char **tokenize(char *buffer)
 	args = (char **)malloc(sizeof(char *) * size);
 	if (args == NULL)
 	{
-		free_stack(state.stack), fclose(state.file);
 		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 	}
 	for (i = 0; i < size - 1; i++)
@@ -56,7 +54,6 @@ char **tokenize(char *buffer)
 			for (i--; i >= 0; i--)
 				free(args[i]);
 			free(args);
-			free_stack(state.stack), fclose(state.file);
 			fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 		}
 	}

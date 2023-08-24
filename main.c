@@ -51,7 +51,6 @@ int checkEmpty(char *buffer)
 int main(int argc, char *argv[])
 {
 	state.buffer = NULL;
-
 	state.stack = NULL;
 	state.line_counter = 0;
 
