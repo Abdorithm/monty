@@ -85,5 +85,5 @@ void choose_f(char *opcode)
 			instruction_type[i].f(&state.stack, state.line_counter), done = 1;
 
 	if (instruction_type[i].opcode == NULL && done == 0)
-		fprintf(stderr, "%d: unknown instruction %s\n", state.line_counter, opcode);
+		fprintf(stderr, "L%d: unknown instruction %s\n", state.line_counter, opcode);
 }
