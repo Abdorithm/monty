@@ -12,7 +12,10 @@
 #include <string.h>
 #include <ctype.h>
 
-#define INIT_STATE {NULL, NULL, NULL, NULL, 0, 0}
+
+#define INIT_STATE {NULL, NULL, NULL, 0}
+
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -31,10 +34,11 @@ typedef struct stack_s
 } stack_t;
 
 /**
- * struct state_t - a state to track variables across modules
+ * struct state_s - a state to track variables across modules
  * @file: file pointer to close the file from functions
- * @buffer: line returned from the file
- * @flag: a flag to toggle between stack and queue
+ * @line_counter: number of lines ina file
+ * @stack: the stack
+ * @arg: arg from line
  *
  * Description: a state like structure to access multile variables
  * from different functions
@@ -43,12 +47,10 @@ typedef struct stack_s
 
 typedef struct state_s
 {
-        stack_t *stack;
-        FILE *file;
-		char *buffer;
-        char **arg;
-        int line_counter;
-        int flag;
+	stack_t *stack;
+	FILE *file;
+	char *arg;
+	int line_counter;
 } state_t;
 
 extern state_t state;
