@@ -16,7 +16,7 @@ void push(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free_stack(state.stack);
 		free_args(state.arg);
-		free(state.buffer);
+		fclose(state.file);
 		exit(EXIT_FAILURE);
 	}
 
@@ -65,7 +65,7 @@ void top(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		free_stack(state.stack);
 		free_args(state.arg);
-		free(state.buffer);
+		fclose(state.file);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", tmp->n);
@@ -108,11 +108,7 @@ char *_strdup(char *str)
 	copy = (char *)malloc((sizeof(char) * size) + 1);
 	if (copy == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		free_stack(state.stack);
-		free_args(state.arg);
-		free(state.buffer);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 
 	for (i = 0; i < size; i++)

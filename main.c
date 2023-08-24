@@ -81,7 +81,6 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		function_caller(state.buffer);
-		free(state.buffer);
 	}
 	fclose(state.file);
 	free_stack(state.stack);

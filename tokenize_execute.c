@@ -7,6 +7,7 @@
 void function_caller(char *buffer)
 {
 	state.arg = tokenize(buffer);
+	free(state.buffer);
 
 	/**
 	 * after we get the command and its arguments
@@ -30,8 +31,8 @@ char **tokenize(char *buffer)
 	tmp = _strdup(buffer);
 	if (tmp == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		free_stack(state.stack), fclose(state.file);
+		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 	}
 	tmp_token = strtok(tmp, " \t\n");
 	while (tmp_token != NULL)
@@ -43,8 +44,8 @@ char **tokenize(char *buffer)
 	args = (char **)malloc(sizeof(char *) * size);
 	if (args == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		free_stack(state.stack), fclose(state.file);
+		fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 	}
 	for (i = 0; i < size - 1; i++)
 	{
@@ -55,8 +56,8 @@ char **tokenize(char *buffer)
 			for (i--; i >= 0; i--)
 				free(args[i]);
 			free(args);
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
+			free_stack(state.stack), fclose(state.file);
+			fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 		}
 	}
 	args[size - 1] = NULL;
