@@ -6,15 +6,14 @@
  */
 void function_caller(char *buffer)
 {
-	char **args = tokenize(buffer);
+	state.arg = tokenize(buffer);
 
-	state.arg = args[1];
 	/**
 	 * after we get the command and its arguments
 	 * we call choose_f to choose the right function
 	 */
-	choose_f(args[0]);
-	free_args(args);
+	choose_f(state.arg[0]);
+	free_args(state.arg);
 }
 
 /**

@@ -50,7 +50,7 @@ int checkEmpty(char *buffer)
  */
 int main(int argc, char *argv[])
 {
-	char *buffer = NULL;
+	state.buffer = NULL;
 
 	state.stack = NULL;
 	state.line_counter = 0;
@@ -68,20 +68,20 @@ int main(int argc, char *argv[])
 	}
 	while (1)
 	{
-		buffer = readLine();
+		state.buffer = readLine();
 		state.line_counter++;
-		if (buffer == NULL)
+		if (state.buffer == NULL)
 		{
-			free(buffer);
+			free(state.buffer);
 			break;
 		}
-		if (checkEmpty(buffer))
+		if (checkEmpty(state.buffer))
 		{
-			free(buffer);
+			free(state.buffer);
 			continue;
 		}
-		function_caller(buffer);
-		free(buffer);
+		function_caller(state.buffer);
+		free(state.buffer);
 	}
 	fclose(state.file);
 	free_stack(state.stack);

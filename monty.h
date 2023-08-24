@@ -12,7 +12,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define INIT_STATE {NULL, NULL, NULL, 0, 0}
+#define INIT_STATE {NULL, NULL, NULL, NULL, 0, 0}
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -45,7 +45,8 @@ typedef struct state_s
 {
         stack_t *stack;
         FILE *file;
-        char *arg;
+		char *buffer;
+        char **arg;
         int line_counter;
         int flag;
 } state_t;
